@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .dashboard {
+            /* background: linear-gradient(to right, #3d84f5, #1ba0ff); */
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: padding 0.3s ease;
+        }
+
+        .dashboard h2 {
+            font-size: 1.8em;
+            margin: 25px;
+            /* height: 9vh; */
+            transition: color 0.3s ease;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 5px;
+            margin-right: 10px;
+            padding: 0 0px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            color: #333;
+            padding: 10px;
+            width: 250px;
+        }
+
+        .search-button {
+            background: #f0a83c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: #e48f17;
+        }
+
+        .cart {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            background-color: #f5fbfb;
+            border-radius: 20px;
+            font-size: 1.8em;
+            margin-right: 10px;
+        }
+
+        .cart-button {
+            background: #f0a83c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-button:hover {
+            background: #e09329;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+            font-size: 1.4em;
+        }
+
+        .dashboard-button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: large;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .dashboard-button:hover {
+            color: #f0a83c;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .product-box {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .product-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            background-color: #f4f4f4;
+        }
+
+        .product-box img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-box h2 {
+            font-size: 1.4em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-box p {
+            font-size: 1.3em;
+            color: #e93f33;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: auto;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            z-index: 1;
+            background: linear-gradient(to bottom, #3e86f9, #1496f3);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            font-size: 1.8em;
+            margin: 0 0 20px 0;
+        }
+
+        .sidebar-button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.3em;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .sidebar-button i {
+            margin-right: 10px;
+        }
+
+        .sidebar-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f0a83c;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 38px;
+            left: 20px;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 2;
+        }
+
+        .menu-icon.active {
+            display: none;
+        }
+
+        .menu-icon:hover {
+            color: #f0a83c;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+        }
+
+        .dropdown-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.3em;
+            padding: 10px;
+            text-align: left;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .dropdown-button i {
+            margin-right: 10px;
+        }
+
+        .dropdown-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f0a83c;
+        }
+
+        .category-list {
+            display: none;
+        }
+
+        .dropdown:hover .category-list {
+            display: block;
+        }
+
+        .category-list a {
+            display: block;
+            padding: 5px 0;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .category-list a:hover {
+            background: #f0a83c;
+            color: #fff;
+        }
+        .header{
+            background-color: rgb(126, 212, 239);
+            color: black;
+            border-radius: 7%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px;
+        }
+
+        .person-card {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            transition: all 0.3s;
+        }
+
+        .person-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .person-image {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            margin: 0 auto 15px;
+        }
+
+        .person-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="menu-icon" id="menuIcon" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+        <h2>CampusCart</h2>
+        <div class="user-profile">
+            <!-- <img src="user-avatar.jpg" alt="User Avatar"> -->
+            <!-- <span>John Doe</span> -->
+        </div>
+        <form method="POST" action="/search" class="search-box">
+            <input type="text" class="search-input" name="product_name" placeholder="Search for products...">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+        <div class="cart">
+            <span class="cart-icon">🛒</span>
+            <a href="http://localhost:5000/addcart"><button class="cart-button">Cart</button></a>
+        </div>
+        <div class="menu">
+            <!-- <button class="dashboard-button">Home</button> -->
+            <a href="/products"><button class="dashboard-button">Home</button></a>
+            <a href="/aboutus"><button class="dashboard-button">About us</button></a>
+            <a href="/log"><button class="dashboard-button">Orders</button></a>
+            <a href="/log" ><button class="dashboard-button">login</button></a>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="header">
+            <h2>My CMPNY</h2>
+        </div>
+        <div class="menu-icon" id="closeIcon" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
+        <div class="dropdown">
+            <button class="dropdown-button">Notes<i class="fas fa-home"></i></button>
+            <div class="category-list">
+                <a href="/category/1st year">1st year</a>
+                <a href="/category/2nd year">2nd year</a>
+                <a href="/category/3rd year">3rd year</a>
+                <a href="/category/4th year">4th year</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-button">Electronics<i class="fas fa-list"></i></button>
+            <div class="category-list">
+                <a href="/category/laptop">Laptops</a>
+                <a href="/category/mobile">Mobiles</a>
+                <a href="/category/tablet">Tablets</a>
+                <a href="/category/buds">Buds</a>
+                <a href="/category/watch">Smart watches</a>
+
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-button">Stationary<i class="fas fa-shopping-cart"></i></button>
+            <div class="category-list">
+                <a href="/category/bag">Bags</a>
+                <a href="/category/book">Books</a>
+                <a href="/category/handbook">Handbooks</a>
+                <a href="/category/other">Other Items</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-button">Shirts<i class="fas fa-user"></i></button>
+            <div class="category-list">
+                <a href="/category/tshirts">T-shirts</a>
+                <a href="/sategory/shirt">Shirts</a>
+                <a href="pant">Pants</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="person-card">
+            <div class="person-image">
+                <img src="https://media.licdn.com/dms/image/D5603AQEl7n9FvbxP_w/profile-displayphoto-shrink_800_800/0/1672941529966?e=1703116800&v=beta&t=0tKttVFvUxtxPtchvAH0THWs5RyBUDpITRspUcNkXQk" alt="Vinay">
+            </div>
+            <h2>Vinay Kumar</h2>
+            <p>Backend Developer</p>
+            <!-- <li>Btech 3<sup>rd</sup> year</li> -->
+            <h3>Hello this is Vinay ,I am the driving force behind the scenes, serving as the backbone of our project. With expertise in backend development, I take pride in crafting the intricate framework that ensures our application operates seamlessly. My responsibilities encompass designing and managing the core engine of our system, orchestrating the data flow, and implementing the server-side logic that powers our application.</h3>
+        </div>
+        <div class="person-card">
+            <div class="person-image">
+                <img src="https://media.licdn.com/dms/image/D5603AQFd6YEFDKDYHw/profile-displayphoto-shrink_800_800/0/1684763716675?e=1703116800&v=beta&t=_rlS5LxVTPNYprd6AgWc1Bp-2_F0QYt_G51Bl5JXjpY" alt="Teja">
+            </div>
+            <h2>Charan Tejas</h2>
+            <p>Fullstack Developer</p>
+            <h3>Hi everyone I am Teja . My versatile role involves creating a user-friendly interface and ensuring a seamless user experience through frontend development. Simultaneously, I also delve into the backend realm, where I assist in crafting the foundation that powers our system. This diverse involvement allows me to bridge the gap between design and functionality, ultimately enhancing the overall quality of our project</h3>
+        </div>
+        <div class="person-card">
+            <div class="person-image">
+                <img src="https://media.licdn.com/dms/image/D5603AQHHeJgfRlP3AQ/profile-displayphoto-shrink_800_800/0/1690334321369?e=1703116800&v=beta&t=s6LW1yrLvFmFgNXdDh-WebSd9OvIIoLoLcXxWBb86YE" alt="Yesu">
+            </div>
+            <h2>Yesu Babu</h2>
+            <p>Fullstack Developer</p>
+            <h3>I am  the mastermind behind the technical wizardry that powers our web application. With years of experience and an insatiable 
+                curiosity for emerging technologies,  They are passionate about coding, solving complex problems, and bringing the best user experience to life.</h3>
+        </div>
+    </div>
+
+    <script>
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.left === '0px' || sidebar.style.left === '') {
+                sidebar.style.left = '-250px';
+                menuIcon.classList.remove('active');
+            } else {
+                sidebar.style.left = '0px';
+                menuIcon.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

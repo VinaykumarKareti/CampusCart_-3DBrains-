@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include your CSS for styling and animations -->
+    <style>
+        body{
+            background-color: #e4f8fd;
+        }
+        .header {
+            /* background: linear-gradient(45deg, #0073e6, #00b3e6); */
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .order-container {
+            background-color: #e4f8fd;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 80px; /* Add space to prevent content from being hidden under the sticky header */
+        }
+        .order-item {
+            display: flex;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+            transition: transform 0.3s ease;
+            background-color: beige;
+        }
+        .order-item:hover {
+            transform: scale(1.02);
+            background-color: beige;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .product-info {
+            flex-grow: 1;
+        }
+        .delete-button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #0073e6;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color:whitesmoke;
+        }
+        .order-details {
+            display: flex;
+            /* background-color: antiquewhite; */
+            flex-direction: column;
+        }
+        h2 {
+            font-size: 20px;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+        a {
+            color: #0073e6;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CampusCart</h1>
+    </div>
+    <div class="order-container">
+        <h1>Your Shopping Cart</h1>
+        <div class="order-details">
+            <!-- Loop through the order details and display them -->
+            {% for order in orders %}
+                <div class="order-item">
+                    <img src="data:image/png;base64, {{ order.product_image }}" alt="Product Image" class="product-image">
+                    <div class="product-info">
+                        <h2>{{ order.product_name }}</h2>
+                        <p>Price: ₹{{ order.price }} /-</p>
+                        <p>Quantity: {{ order.quantity }}</p>
+                        <a href="{{ url_for('product_details', product_id=order.product_id) }}">View Details</a>
+                    </div>
+                    <form method="POST" action="{{url_for('delete_cart',order_id=order.product_id)}}">
+                    <button class="delete-button">Remove</button>
+                </form>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="back-link" href="{{ url_for('products') }}">Continue Shopping</a>
+    </div>
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .order-item {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+        .order-item:hover {
+            transform: scale(1.02);
+            background-color: #f0f0f0;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .product-info {
+            flex-grow: 1;
+        }
+        .delete-button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #0073e6;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-container">
+        <h1>Your Order Details</h1>
+        <div class="order-details">
+            {% for order in orders %}
+                <div class="order-item">
+                    <img src="data:image/png;base64, {{ order.product_image }}" alt="Product Image" class="product-image">
+                    <div class="product-info">
+                        <h2>{{ order.product_name }}</h2>
+                        <p>Price: ₹{{ order.price }} /-</p>
+                        <p>Quantity: {{ order.quantity }}</p>
+                        <a href="{{ url_for('product_details', product_id=order.product_id) }}">View Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="back-link" href="{{ url_for('products') }}">Back to All Products</a>
+    </div>
+</body>
+</html> -->

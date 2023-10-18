@@ -1,0 +1,642 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f2f2f2;
+        }
+
+        .header {
+            background: linear-gradient(to right, #007bff, #0099e5);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-icon {
+            font-size: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            color: #0099e5;
+        }
+
+        .dashboard h2 {
+            margin: 0;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .product-container {
+            display: flex;
+            margin: 5%;
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        .product-container:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background: #fcfcfc;
+        }
+
+        .product-image {
+            position: sticky;
+            top: 0;
+            bottom: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, #fff, #f2f2f2);
+        }
+
+        #img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .buy {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #buy, #addToCart {
+            border: none;
+            background: #f68b25;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            animation: scaleIn 0.5s ease-in-out;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        #buy:hover, #addToCart:hover {
+            background: #e96800;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .fa-shopping-cart {
+            margin-right: 5px;
+        }
+
+        .product-details {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        strong {
+            font-size: large;
+            color: #f68b25;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #101110;
+            margin-bottom: 1px;
+            transition: color 0.3s;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 1px;
+            transition: color 0.3s;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2980b9;
+            transition: color 0.3s;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>CampusCart</h2>
+    </div>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="data:image/png;base64, {{ product_data.product_image }}" alt="Product Image" id="img">
+            <div class="buy">
+                <form method="post" action="{{ url_for('buy_product', product_id=product_data.product_id) }}">
+                    <button id="buy" type="submit"><i class="fas fa-shopping-cart"></i> BUY</button>
+                </form>
+                <form method="post" action="{{ url_for('add_product', product_id=product_data.product_id) }}">
+                <button id="addToCart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="product-details">
+            <h1>Product Details</h1>
+            <h2>{{ product_data.product_name}}</h2>
+            <div style="display:flex;">
+                <div style="width: 200px;"><strong>Description:</strong></div>
+                <div><span>{{ product_data.product_description }}</span></div>
+            </div>
+            <h3>Special Price</h3>
+            <h1 style="text-align: start;">₹ {{ product_data.price }} /-</h1>
+            <strong>Category Type: {{ product_data.category_type }}</strong><br><br>
+            <strong>Year: {{ product_data.year }}</strong><br>
+            <h2>Seller Details:</h2>
+            <h3>Seller ID: {{ product_data.seller_id }}</h3>
+            <h3>Seller Name: {{ product_data.seller_name }}</h3>
+            <h3>Seller_email: {{ product_data.seller_email }}</h3>
+            <a class="back-link" href="{{ url_for('products') }}">Back to All Products</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
+ -->
+<!-- 
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .product-container {
+            display: flex;
+            margin: 5%;
+            border: 5px solid salmon;
+            background-color: #fff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .product-image {
+            position: sticky;
+            top: 0;
+            bottom: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #img {
+            height: 500px;
+            width: 500px;
+        }
+
+        .buy {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #buy, #addToCart {
+            border: none;
+            background-color: #e9b831;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 18px;
+            animation: scaleIn 0.5s ease-in-out;
+        }
+
+        #buy:hover, #addToCart:hover {
+            background-color: #2980b9;
+        }
+
+        .fa-shopping-cart {
+            margin-right: 5px;
+        }
+
+        .product-details {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        strong {
+            font-size: large;
+            color: #5cc45c;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #101110;
+            margin-bottom: 1px;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 1px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2980b9;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="data:image/png;base64, {{ product_data.product_image }}" alt="Product Image" id="img">
+            <div class="buy">
+                <form method="post" action="{{ url_for('buy_product', product_id=product_data.product_id) }}">
+                    <button id="buy" type="submit"><i class="fas fa-shopping-cart"></i> BUY</button>
+                </form>
+                <form method="post" action="{{ url_for('add_product', product_id=product_data.product_id) }}">
+                <button id="addToCart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="product-details">
+            <h1>Product Details</h1>
+             <h2>uvicorn your_script_name:app --reload -->
+            <!-- </h2>
+            <div style="display:flex;">
+                <div style="width: 200px;"><strong>Description:</strong></div>
+                <div><span>{{ product_data.product_description }}</span></div>
+            </div>
+            <h3>Special Price</h3>
+            <h1 style="text-align: start;">₹ {{ product_data.price }} /-</h1>
+            <strong>Category Type: {{ product_data.category_type }}</strong><br><br>
+            <strong>Year: {{ product_data.year }}</strong><br>
+            <h2>Seller Details:</h2>
+            <h3>Seller ID: {{ product_data.seller_id }}</h3>
+            <h3>Seller Name: {{ product_data.seller_name }}</h3>
+            <h3>Seller Phone Number: {{ product_data.seller_email }}</h3> -->
+            <!-- <h3>Product ID: {{ product_data.product_id }}</h3> -->
+            <!-- <a class="back-link" href="{{ url_for('products') }}">Back to All Products</a>
+        </div>
+    </div>
+
+    
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <title>Product Details</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: 'Arial', sans-serif;
+                background-color: #f2f2f2;
+            }
+    
+            header {
+                background-color: #2980b9;
+                color: #fff;
+                padding: 10px 0;
+                text-align: center;
+            }
+    
+            .product-container {
+                display: flex;
+                flex-direction: column;
+                margin: 5% 10%;
+                background-color: #fff;
+                animation: fadeIn 1s ease-in-out;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+           
+            .product-image {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+    
+            #img {
+                height: 500px;
+                width: 500px;
+            }
+    
+            .buy {
+                display: flex;
+                justify-content: center;
+                margin: 10px;
+                animation: fadeIn 1s ease-in-out;
+            }
+            .menu {
+            display: flex;
+            gap: 20px;
+            font-size: 1.4em;
+        }
+    
+            #buy, #addToCart {
+                border: none;
+                background-color: #e9b831;
+                color: white;
+                padding: 10px 20px;
+                margin: 5px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+                font-size: 18px;
+                animation: scaleIn 0.5s ease-in-out;
+            }
+    
+            #buy:hover, #addToCart:hover {
+                background-color: #2980b9;
+            }
+    
+            .fa-shopping-cart {
+                margin-right: 5px;
+            }
+    
+            .product-details {
+                padding: 20px;
+            }
+    
+            strong {
+                font-size: large;
+                color: #5cc45c;
+            }
+    
+            h1 {
+                text-align: center;
+                font-size: 32px;
+                color: #333;
+            }
+    
+            h2 {
+                font-size: 24px;
+                color: #101110;
+                margin-bottom: 1px;
+            }
+    
+            h3 {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 1px;
+            }
+    
+            .back-link {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+                font-size: 18px;
+                color: #2980b9;
+            }
+    
+            /* Keyframes for animations */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+    
+            @keyframes scaleIn {
+                from {
+                    transform: scale(0.8);
+                }
+                to {
+                    transform: scale(1);
+                }
+            }
+            .dashboard-button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: large;
+            transition: color 0.3s ease;
+        }
+        .dashboard {
+        background-color: #333; /* Background color for the dashboard */
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .dashboard h2 {
+        color: #fff; /* Text color for the dashboard title */
+    }
+
+    .search-box {
+        display: flex;
+        margin: 0;
+    }
+
+    .search-input {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-button {
+        background-color: #e9b831;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .cart {
+        display: flex;
+        align-items: center;
+    }
+
+    .cart-icon {
+        font-size: 1.5em;
+    }
+
+    .cart-button {
+        background-color: #e9b831;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-left: 5px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .menu {
+        display: flex;
+        gap: 20px;
+        font-size: 1.4em;
+    }
+
+    .dashboard-button {
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: large;
+        transition: color 0.3s ease;
+        text-decoration: none;
+    }
+
+    .dashboard-button:hover {
+        color: #e9b831;
+    }
+
+        </style>
+</head>
+<body>
+    <!-- <header>
+        <h1>CampusCart</h1>
+    </header> -->
+    <div class="dashboard" style="position: sticky; top: 0; left: 0; z-index: 1;">
+        <!-- <div class="menu-icon" id="menuIcon" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div> -->
+        <h2>CampusCart</h2>
+        <form method="POST" action="/search" class="search-box">
+            <input type="text" class="search-input" name="product_name" placeholder="Search for products...">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+        <div class="cart">
+            <span class="cart-icon">🛒</span>
+            <a href="http://localhost:5000/addcart"><button class="cart-button">Cart</button></a>
+        </div>
+        <div class="menu">
+            <a href="http://localhost:5000/addproduct"><button class="dashboard-button">AddProduct</button>
+            <a href="/aboutus"><button class="dashboard-button">about us</button></a>
+            <a href="http://localhost:5000/order"><button class="dashboard-button">Orders</button></a>
+            <a href="/profile" ><button class="dashboard-button">profile</button></a>
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="data:image/png;base64, {{ product_data.product_image }}" alt="Product Image" id="img">
+            <div class="buy">
+                <form method="post" action="{{ url_for('buy_product', product_id=product_data.product_id) }}">
+                    <button id="buy" type="submit"><i class="fas fa-shopping-cart"></i> BUY</button>
+                </form>
+                <form method="post" action="{{ url_for('add_product', product_id=product_data.product_id) }}">
+                <button id="addToCart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="product-details">
+            <h1>Product Details</h1>
+            <div style="display:flex;">
+                <div style="width: 200px;"><strong>Description:</strong></div>
+                <div><span>{{ product_data.product_description }}</span></div>
+            </div>
+            <h3>Special Price</h3>
+            <h1 style="text-align: start;">₹ {{ product_data.price }} /-</h1>
+            <strong>Category Type: {{ product_data.category_type }}</strong><br><br>
+            <strong>Year: {{ product_data.year }}</strong><br>
+            <h2>Seller Details:</h2>
+            <h3>Seller ID: {{ product_data.seller_id }}</h3>
+            <h3>Seller Name: {{ product_data.seller_name }}</h3>
+            <h3>Seller Phone Number: {{ product_data.seller_email }}</h3>
+            <a class="back-link" href="{{ url_for('products') }}">Back to All Products</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

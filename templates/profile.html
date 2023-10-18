@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            /* background: linear-gradient(45deg, #3d83f4, #28a8f7); */
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .profile-container {
+            max-width: 500px;
+            margin: 20px auto; /* Add margin for the gap */
+            padding: 20px;
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .profile-image {
+            text-align: center;
+            position: relative;
+        }
+
+        #user-image {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        #image-input {
+            display: none;
+        }
+
+        .upload-button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f0a83c;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .upload-button:hover {
+            background-color: #e09329;
+        }
+
+        .profile-details label {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .profile-details input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .profile-details input:focus {
+            border-color: #0078d4;
+        }
+
+        .update-button {
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        .update-button:hover {
+            background-color: #0078d4;
+        }
+
+        #user-image:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-container:hover {
+            background-color: #f8f8f8;
+            transform: translateY(-5px);
+        }
+        h1{
+            color: whitesmoke;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="header">
+        <h1>CampusCart</h1>
+    </div>
+    <div class="profile-container">
+        <h1>My Profile</h1>
+        <form action="/update_profile" method="POST" enctype="multipart/form-data">
+            <div class="profile-image">
+                <img src="data:image/jpeg;base64,{{ user_data.image }}" alt="User Avatar" id="user-image">
+                <input type="file" name="image" accept="image/*" id="image-input">
+                <label for="image-input" class="upload-button">Change Image</label>
+            </div>
+            <div class="profile-details">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value="{{user_data.name}}">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="{{ user_data.email }}" readonly>
+                <label for="password">Password:</label>
+                <input type="text" name="password" id="password" value="{{ user_data.password }}" required>
+                <label for="user_id">User ID:</label>
+                <input type="text" name="user_id" id="user_id" value="{{ user_data.Id }}" readonly>
+                <button type="submit" class="update-button">Update Profile</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

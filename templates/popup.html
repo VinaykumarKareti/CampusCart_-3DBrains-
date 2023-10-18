@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Styles for the overlay background */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            animation: fadeInOverlay 0.5s;
+        }
+
+        /* Keyframes for the overlay fade in animation */
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Styles for the pop-up content */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #FF5733, #FFBD33, #33FF57);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            text-align: center;
+            animation: fadeInPopup 0.5s;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Keyframes for the pop-up fade in animation */
+        @keyframes fadeInPopup {
+            from { transform: translate(-50%, -70%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
+        }
+
+        /* Hover effect for the pop-up content */
+        .popup:hover {
+            transform: translate(-50%, -52%);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add some text color */
+        .popup h1 {
+            color: #fff;
+        }
+
+        .popup p {
+            color: #fff;
+        }
+
+        /* Add a close button style */
+        .popup button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        /* Close button hover effect */
+        .popup button:hover {
+            background: #e7e5e5;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- The overlay and pop-up content -->
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+    <h1>Order Successfully Placed</h1>
+    <p>Thank you for your order!</p>
+    <a href="http://localhost:5000/Account"><button>Close</button>
+</div>
+
+<script>
+    // Display the popup when the webpage is loaded
+    window.addEventListener('load', function () {
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("popup").style.display = "block";
+    });
+
+    function closePopup() {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("popup").style.display = "none";
+    }
+</script>
+</body>
+</html>

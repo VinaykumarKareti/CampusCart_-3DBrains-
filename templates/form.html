@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px #000000;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="file"] {
+            padding: 0;
+        }
+
+        input[type="submit"] {
+            background: #ff9900;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 3px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: #ff6600;
+        }
+
+        /* Add more custom styles and animations as needed */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Information Form</h1>
+        <form action="/submit" method="post" enctype="multipart/form-data">
+            <label for="seller_id">Seller ID:</label>
+            <input type="text" name="seller_id" required>
+
+            <label for="product_name">Product_name</label>
+            <input type="text" name="product_name" required>
+
+            <label for="product_image">Product Image:</label>
+            <input type="file" name="product_image" required>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" required>
+
+            <label for="product_description">Product Description:</label>
+            <textarea name="product_description" required></textarea>
+
+            <label for="category_type">Category Type:</label>
+            <input type="text" name="category_type" required>
+
+            <label for="year">Year (only number):</label>
+            <input type="number" name="year" required>
+
+            <label for="seller_name">Seller Name:</label>
+            <input type="text" name="seller_name" required>
+
+            <label for="seller_phone_number">Seller_email:</label>
+            <input type="email" name="seller_email" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

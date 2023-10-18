@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0; 
+            font-family: Arial, sans-serif;
+            background-color: #858585; /* Background color */
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: transparent;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #4c4c4c;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .hero-description {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .get-started-button {
+            display: inline-block;
+            background-color: #ff8c00; /* Button background color */
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            text-decoration: none;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .get-started-button:hover {
+            background-color: #e87700; /* Button hover background color */
+        }
+        .aa{
+            font-size: 35px;
+            border-radius: 5px;
+            background:linear-gradient(135deg,rgb(0, 157, 255),rgb(108, 195, 252))
+        }
+        .aa:hover{
+            cursor: pointer;
+            font-size: 37px;
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to CampusCart</h1>
+            <p class="hero-description">Your One-Stop Shop for Campus Essentials</p>
+            <form  method="GET" action="/products">
+                <button class="aa" type="submit">Get Started</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
