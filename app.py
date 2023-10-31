@@ -23,8 +23,8 @@ CurrentAccount=""
 
 
 #AdminAccountDeatils
-sender_email = "karetivenkatavinaykumar@gmail.com"
-sender_password = "ttif ezpl hqxh phum"
+sender_email = "*******@gmail.com"
+sender_password = "***********"
 
 
 
@@ -539,3 +539,8 @@ def popup():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# p: ttif ezpl hqxh phum
+
+
